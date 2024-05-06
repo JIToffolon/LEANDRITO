@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CuadrosController;
+use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
@@ -26,6 +27,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
     Route::get('/cuadros', [CuadrosController::class, 'index'])->name('cuadros.index');
+    Route::get('/Contacto', [ContactoController::class, 'index'])->name('Contacto.index');
 });
 
 require __DIR__.'/auth.php';
