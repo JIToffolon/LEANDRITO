@@ -25,9 +25,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+
+    Route::resource('users', UserController::class);
+    Route::get('/api/users', [UserController::class, 'getUsers'])->name('users.get');
+
     Route::get('/cuadros', [CuadrosController::class, 'index'])->name('cuadros.index');
-    Route::get('/Contacto', [ContactoController::class, 'index'])->name('Contacto.index');
+    Route::get('/contacto', [ContactoController::class, 'index'])->name('Contacto.index');
 });
 
 require __DIR__.'/auth.php';
