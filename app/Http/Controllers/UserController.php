@@ -11,11 +11,10 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-
         $roles = Role::all();
         $users = User::with('roles')->get();
 
-        return Inertia::render('Users/Index', [
+        return Inertia::render('Admin/Users/Index', [
             'users' => $users,
             'roles' => $roles,
         ]);

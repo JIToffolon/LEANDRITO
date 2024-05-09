@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import DataTable from 'react-data-table-component';
 
-const UsersList = ({ users, editUser, deleteUser }) => {
+const UsersTable = ({ users, editUser, deleteUser }) => {
   const [filteredUsers, setFilteredUsers] = useState(users);
 
   useEffect(() => {
@@ -63,4 +63,4 @@ const UsersList = ({ users, editUser, deleteUser }) => {
   );
 };
 
-export default UsersList;
+export default UsersTable;

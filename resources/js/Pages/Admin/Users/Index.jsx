@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, usePage } from '@inertiajs/react';
 import EditUserModal from '@/Components/EditUserModal';
-import UsersList from '@/Components/UsersList';
+import UsersTable from '@/Components/UsersTable';
 import axios from 'axios'; // Importa axios
 
 const UsersIndex = ({ auth }) => {
@@ -86,7 +86,7 @@ const UsersIndex = ({ auth }) => {
             </div>
           )}
           <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-            <UsersList users={users} editUser={editUser} deleteUser={deleteUser} />
+            <UsersTable users={users} editUser={editUser} deleteUser={deleteUser} />
           </div>
         </div>
       </div>
