@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cuadro;
+use App\Models\Producto;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -11,20 +11,20 @@ class CuadrosController extends Controller
 
     public function index(){
         return Inertia::render('Admin/Cuadros/Index', [
-            'cuadros' => Cuadro::all()
+            'cuadros' => Producto::where('tipo_producto_id',1)->get()
         ]);
     }
 
     public function getCuadros(Request $request)
     {
-        $cuadros = Cuadro::all();
+        $cuadros = Producto::where('tipo_producto_id', 1)->get();
         return response()->json(['cuadros' => $cuadros]);
     }
 
     public function shop()
     {
         return Inertia::render('Cuadros/Index', [
-            'cuadros' => Cuadro::all()
+            'cuadros' => Producto::where('tipo_producto_id', 1)->get()
         ]);
     }
 
@@ -32,7 +32,7 @@ class CuadrosController extends Controller
     public function update($id, Request $request)
     {
         // Encuentra el usuario por su ID
-        $cuadro = Cuadro::findOrFail($id);
+        $cuadro = Producto::findOrFail($id);
 
         // Valida los datos del formulario
         $validatedData = $request->validate([
@@ -48,7 +48,7 @@ class CuadrosController extends Controller
     }
 
     public function destroy($id){
-        $cuadro = Cuadro::findOrFail($id);
+        $cuadro = Producto::findOrFail($id);
         $cuadro->delete();
         return response()->json(['success' => 'Cuadro Eliminado correctamente!']);
     }
