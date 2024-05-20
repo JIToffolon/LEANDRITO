@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, usePage } from '@inertiajs/react';
+import { Head, router } from '@inertiajs/react';
 import CuadrosTable from '@/Components/CuadrosTable';
-import axios from 'axios'; // Importa axios
+import axios from 'axios';
 import EditCuadroModal from '@/Components/EditCuadroModal';
+import CreateCuadroModal from '@/Components/CreateCuadroModal';
 
 const CuadrosIndex = ({ auth }) => {
-  const { visit, post, put } = usePage(); // Agrega put a los hooks
-  const [showModal, setShowModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [showCreateModal, setShowCreateModal] = useState(false);
   const [selectedCuadro, setSelectedCuadro] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
   const [cuadros, setCuadros] = useState([]);
@@ -15,7 +16,7 @@ const CuadrosIndex = ({ auth }) => {
   const loadCuadros = async () => {
     try {
       const response = await axios.get(route('cuadros.get'));
-      setCuadros(response.data.cuadros); // Actualiza el estado de users usando setUsers
+      setCuadros(response.data.cuadros);
     } catch (error) {
       console.error('Error al cargar la lista de cuadros:', error);
       throw error;
@@ -24,19 +25,24 @@ const CuadrosIndex = ({ auth }) => {
 
   const handleSuccess = (message) => {
     setSuccessMessage(message);
+    loadCuadros(); // Recargar la lista de cuadros después de una acción exitosa
   };
 
   const editCuadro = (cuadro) => {
     setSelectedCuadro(cuadro);
-    setShowModal(true);
+    setShowEditModal(true);
   };
 
-  const deleteCuadro = async (user) => {
+  const createCuadro = (cuadro) => {
+    setShowCreateModal(true)
+  };
+
+
+  const deleteCuadro = async (cuadro) => {
     if (confirm('¿Estás seguro de eliminar este cuadro?')) {
       try {
         await axios.delete(route('cuadros.destroy', { id: cuadro.id }));
-        setSuccessMessage('Cuadro eliminado correctamente');
-        loadCuadros(); // Recargar la lista de usuarios después de eliminar uno
+        handleSuccess('Cuadro eliminado correctamente');
       } catch (error) {
         console.error('Error al eliminar el Cuadro:', error);
         throw error;
@@ -44,13 +50,21 @@ const CuadrosIndex = ({ auth }) => {
     }
   };
 
-  const handleCloseModal = () => {
-    setShowModal(false);
+  const handleCloseEditModal = () => {
+    setShowEditModal(false);
+  };
+
+  const handleCloseCreateModal = () => {
+    setShowCreateModal(false);
   };
 
   const updateCuadro = async (id, cuadroData) => {
     try {
-      const response = await axios.put(route('cuadros.update', { cuadro: id }), cuadroData);
+      const response = await axios.post(route('cuadros.update.post', { cuadro: id }), cuadroData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
       setSuccessMessage(response.data.success);
       loadCuadros(); // Recargar la lista de usuarios después de una actualización exitosa
     } catch (error) {
@@ -59,9 +73,18 @@ const CuadrosIndex = ({ auth }) => {
     }
   };
 
+  const storeCuadro = async (cuadroData) => {
+    try {
+      const response = await axios.post(route('cuadros.store'), cuadroData);
+      setSuccessMessage(response.data.success);
+      loadCuadros();
+    } catch (error) {
+      console.error('Error al crear el cuadro:', error);
+    }
+  };
   useEffect(() => {
     loadCuadros();
-  }, []); // Se ejecuta solo una vez al cargar el componente
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -86,12 +109,13 @@ const CuadrosIndex = ({ auth }) => {
             </div>
           )}
           <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-            <CuadrosTable cuadros={cuadros} editCuadro={editCuadro} deleteCuadro={deleteCuadro} />
+            <CuadrosTable cuadros={cuadros} editCuadro={editCuadro} deleteCuadro={deleteCuadro} createCuadro={createCuadro} />
           </div>
         </div>
       </div>
 
-      <EditCuadroModal cuadro={selectedCuadro} show={showModal} onHide={handleCloseModal} updateCuadro={updateCuadro} onSuccess={handleSuccess} />
+      <EditCuadroModal cuadro={selectedCuadro} show={showEditModal} onHide={handleCloseEditModal} updateCuadro={updateCuadro} onSuccess={handleSuccess} />
+      <CreateCuadroModal show={showCreateModal} onHide={handleCloseCreateModal} storeCuadro={storeCuadro} onSuccess={handleSuccess} />
     </AuthenticatedLayout>
   );
 };

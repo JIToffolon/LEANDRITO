@@ -32,6 +32,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/api/users', [UserController::class, 'getUsers'])->name('users.get');
 
         Route::resource('cuadros', CuadrosController::class);
+        Route::post('/cuadros/update/{cuadro}', [CuadrosController::class, 'update2'])->name('cuadros.update.post');
         Route::get('/api/cuadros', [CuadrosController::class, 'getCuadros'])->name('cuadros.get');
 
     });

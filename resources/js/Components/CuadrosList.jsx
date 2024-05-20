@@ -13,7 +13,7 @@ export const CuadrosList = ({ cuadros }) => {
                         className="bg-gray-300 rounded-lg shadow-md p-4"
                     >
                         <img
-                            src="/Assets/images/cuadrito.png"
+                            src={`assets/images/${cuadro.photo}`}
                             alt="Cuadro"
                             className="w-full h-40 object-contain rounded-t-lg hover:scale-125 "
                         />

@@ -19,7 +19,7 @@ class CuadrosSeeder extends Seeder
             $modelo = new Producto();
             $modelo->name = $cuadro;
             $modelo->price = random_int(400, 1000);
-            $modelo->photo = '/Assets/images/cuadrito.png';
+            $modelo->photo = 'cuadrito.png';
             $modelo->save();
         }
     }
