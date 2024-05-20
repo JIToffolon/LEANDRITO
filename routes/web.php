@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CarritoController;
+use App\Http\Controllers\CarritoProductosController;
 use App\Http\Controllers\CuadrosController;
 use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\ProfileController;
@@ -40,6 +42,16 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/cuadros', [CuadrosController::class, 'shop'])->name('shop.index');
     Route::get('/contacto', [ContactoController::class, 'index'])->name('Contacto.index');
+
+    /* RUTAS PARA EL MANEJO DEL CARRITO.  LEER EL ARCHIVO README*/
+    Route::get('carrito', [CarritoController::class, 'index'])->name('carrito.index');
+    Route::get('carritoJson', [CarritoController::class, 'getCarrito'])->name('carrito.get');
+    Route::put('cartitem/{id}/updateqty', [CarritoProductosController::class, 'updateQuantity'])->name('product.updateQuantity');
+    Route::post('add-to-cart/{producto_id}', [CarritoProductosController::class, 'addToCart'])->name('producto.addToCart'); 
+    Route::delete('deleteproduct/{id}', [CarritoProductosController::class, 'destroy'])->name('product.deleteInCart');
+    Route::get('cartItemsCount', [CarritoProductosController::class, 'countItemsInCart'])->name('cart.itemsCount');
+
+
 });
 
 require __DIR__.'/auth.php';
