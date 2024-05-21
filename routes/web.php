@@ -5,8 +5,8 @@ use App\Http\Controllers\CarritoProductosController;
 use App\Http\Controllers\CuadrosController;
 use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
-use App\Models\Cuadro;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -36,6 +36,10 @@ Route::middleware('auth')->group(function () {
         Route::resource('cuadros', CuadrosController::class);
         Route::post('/cuadros/update/{cuadro}', [CuadrosController::class, 'update2'])->name('cuadros.update.post');
         Route::get('/api/cuadros', [CuadrosController::class, 'getCuadros'])->name('cuadros.get');
+
+        Route::resource('roles', RoleController::class);
+        Route::get('/api/roles', [RoleController::class, 'getRoles'])->name('roles.get');
+        Route::get('/api/permissions', [RoleController::class, 'getPermissions'])->name('permissions.get');
 
     });
 

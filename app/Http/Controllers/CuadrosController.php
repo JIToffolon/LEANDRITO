@@ -17,7 +17,7 @@ class CuadrosController extends Controller
         ]);
     }
 
-    public function getCuadros(Request $request)
+    public function getCuadros()
     {
         $cuadros = Producto::where('tipo_producto_id', 1)->get();
         return response()->json(['cuadros' => $cuadros]);
