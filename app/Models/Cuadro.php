@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Cuadro extends Model
 {
     protected $table = 'cuadros';
-    protected $fillable = ['id','name','price','photo'];
+    protected $fillable = ['id','name','price','photo','quanty'];
 }

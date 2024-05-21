@@ -26,7 +26,7 @@ export const FormWithCustomHook = () => {
                 onSubmit={handleSubmit}
                 className="md:w-full px-5 md:px-40  py-20 mt-10 bg-gray-300  text-start flex flex-col font-[Poppins] "
             >
-                <div className="container flex flex-col mt-5">
+                <div className="container flex flex-col mt-5 text-black">
                     <h1 className="prose text-5xl text-start">Contact</h1>
 
                     <p className=" prose prose-gray prose-sm w-full py-3 text-sm text-center">

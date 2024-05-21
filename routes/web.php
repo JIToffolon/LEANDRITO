@@ -1,6 +1,8 @@
 <?php
-
+use App\Models\Cuadro;
 use App\Http\Controllers\CuadrosController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -31,6 +33,11 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/cuadros', [CuadrosController::class, 'index'])->name('cuadros.index');
     Route::get('/contacto', [ContactoController::class, 'index'])->name('Contacto.index');
+    Route::get('/cart', [CartController::class, 'index'])->name('Cart.index');
+    Route::get('/product/{id}', function ($id) {
+        $cuadros = Cuadro::all();
+        return Inertia::render('Product/Index', ['cuadros' => $cuadros, 'id' => $id]);
+    });
 });
 
 require __DIR__.'/auth.php';
