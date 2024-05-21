@@ -4,6 +4,7 @@ use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\CarritoProductosController;
 use App\Http\Controllers\CuadrosController;
 use App\Http\Controllers\ContactoController;
+use App\Http\Controllers\PedidosController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
@@ -40,6 +41,8 @@ Route::middleware('auth')->group(function () {
         Route::resource('roles', RoleController::class);
         Route::get('/api/roles', [RoleController::class, 'getRoles'])->name('roles.get');
         Route::get('/api/permissions', [RoleController::class, 'getPermissions'])->name('permissions.get');
+
+        Route::get('/pedidos', [PedidosController::class, 'index'])->name('pedidos.index');
 
     });
 

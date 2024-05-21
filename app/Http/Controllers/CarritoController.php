@@ -13,12 +13,7 @@ class CarritoController extends Controller
 {
     public function index()
     {
-        $carrito_id = session()->get('carrito_id');
-        $productos = ProductoCarrito::with('producto')->where('carrito_id', $carrito_id)->get();
-
-        return Inertia::render('Carrito/Index', [
-            'productos' => $productos
-        ]);
+        return Inertia::render('Carrito/Index');
     }
 
     public function getCarrito(){

@@ -9,12 +9,12 @@ use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
         return Inertia::render('Admin/Users/Index');
     }
 
-    public function getUsers(Request $request)
+    public function getUsers()
     {
         $users = User::with('roles')->get();
         return response()->json(['users' => $users]);
