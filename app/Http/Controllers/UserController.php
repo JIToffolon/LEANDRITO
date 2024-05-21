@@ -11,13 +11,7 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        $roles = Role::all();
-        $users = User::with('roles')->get();
-
-        return Inertia::render('Admin/Users/Index', [
-            'users' => $users,
-            'roles' => $roles,
-        ]);
+        return Inertia::render('Admin/Users/Index');
     }
 
     public function getUsers(Request $request)
@@ -30,13 +24,12 @@ class UserController extends Controller
     {
         // Encuentra el usuario por su ID
         $user = User::findOrFail($id);
-
         // Valida los datos del formulario
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,'.$user->id,
         ]);
-
+        $user->syncRoles($request->role_name);
         // Actualiza los datos del usuario
         $user->update($validatedData);
 

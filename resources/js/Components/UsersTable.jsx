@@ -16,9 +16,6 @@ const UsersTable = ({ users, editUser, deleteUser }) => {
     );
     setFilteredUsers(filteredData);
   };
-  const createUser = () => {
-    visit(route('users.create'));
-  };
 
 
   const columns = [
@@ -31,6 +28,13 @@ const UsersTable = ({ users, editUser, deleteUser }) => {
       name: 'Email',
       selector: row => row.email,
       sortable: true,
+    },
+    {
+      name: 'Rol',
+      cell: row => (
+        <span>{row.roles.length > 0 ? row.roles[0].name : 'Sin rol'}</span>
+      ),
+      sortable: false,
     },
     {
       name: 'Acciones',
@@ -48,7 +52,6 @@ const UsersTable = ({ users, editUser, deleteUser }) => {
     <div>
        <div className="flex justify-between items-center mb-4">
       <input type="text" placeholder="Buscar usuarios" onChange={handleFilter} className="border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-400 mb-4 ml-4 mt-2" />
-      <button onClick={createUser} className="rounded px-3 py-2 bg-blue-500 text-white mt-2 mr-4 mb-4">Crear Nuevo Usuario</button>
       </div>
       <DataTable
         columns={columns}

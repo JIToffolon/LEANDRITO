@@ -11,6 +11,7 @@ const UsersIndex = ({ auth }) => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
   const [users, setUsers] = useState([]);
+  const [roles, setRoles] = useState([]);
 
   const loadUsers = async () => {
     try {
@@ -21,6 +22,16 @@ const UsersIndex = ({ auth }) => {
       throw error;
     }
   };
+
+  const loadRoles = async () => {
+    try {
+      const response = await axios.get(route('roles.get'));
+      setRoles(response.data.roles); // Actualiza el estado de users usando setUsers
+    } catch (error) {
+      console.error('Error al cargar la lista de roles:', error);
+      throw error;
+    }
+  }
 
   const handleSuccess = (message) => {
     setSuccessMessage(message);
@@ -61,6 +72,7 @@ const UsersIndex = ({ auth }) => {
 
   useEffect(() => {
     loadUsers();
+    loadRoles();
   }, []); // Se ejecuta solo una vez al cargar el componente
 
   useEffect(() => {
@@ -91,7 +103,7 @@ const UsersIndex = ({ auth }) => {
         </div>
       </div>
 
-      <EditUserModal user={selectedUser} show={showModal} onHide={handleCloseModal} updateUser={updateUser} onSuccess={handleSuccess} />
+      <EditUserModal user={selectedUser} show={showModal} onHide={handleCloseModal} updateUser={updateUser} onSuccess={handleSuccess} roles={roles} />
     </AuthenticatedLayout>
   );
 };
