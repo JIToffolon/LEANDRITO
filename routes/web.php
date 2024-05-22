@@ -2,12 +2,16 @@
 
 use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\CarritoProductosController;
+use App\Models\Cuadro;
 use App\Http\Controllers\CuadrosController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\PedidosController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Models\Producto;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -59,6 +63,11 @@ Route::middleware('auth')->group(function () {
     Route::get('cartItemsCount', [CarritoProductosController::class, 'countItemsInCart'])->name('carrito.itemsCount');
 
 
+    Route::get('/cart', [CartController::class, 'index'])->name('Cart.index');
+    Route::get('/product/{id}', function ($id) {
+        $cuadros = Producto::all();
+        return Inertia::render('Product/Index', ['cuadros' => $cuadros, 'id' => $id]);
+    });
 });
 
 require __DIR__.'/auth.php';
