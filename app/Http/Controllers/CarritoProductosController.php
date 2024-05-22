@@ -26,6 +26,7 @@ class CarritoProductosController extends Controller
             session()->put('carrito_id', $carrito_id);
         }
 
+
         $itemExistente = ProductoCarrito::where('producto_id', $producto_id)
             ->where('carrito_id', $carrito_id)
             ->first();
@@ -37,15 +38,14 @@ class CarritoProductosController extends Controller
                 'final_price' => $finalPrice,
             ]);
         } else {
-
-            ProductoCarrito::create([
+           $productoCreado = ProductoCarrito::create([
                 'carrito_id' => $carrito_id,
                 'producto_id' => $producto_id,
+                'tipo_producto_id' => 1,
                 'quantity' => 1,
                 'total' => $producto->price
             ]);
         }
-
         return response()->json(['message' => 'Producto agregado al carrito correctamente']);
     }
 

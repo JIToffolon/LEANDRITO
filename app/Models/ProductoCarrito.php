@@ -10,7 +10,7 @@ class ProductoCarrito extends Model
     use HasFactory;
 
     protected $table = 'productos_carrito';
-    protected $fillable = ['id_carrito','id_producto','id_tipo_producto','quantity','total'];
+    protected $fillable = ['carrito_id','producto_id','tipo_producto_id','quantity','total'];
 
     public function carrito(){
         return $this->belongsTo(Carrito::class);
