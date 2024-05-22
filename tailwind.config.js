@@ -1,5 +1,6 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
 import forms from '@tailwindcss/forms';
+import daisyui from 'daisyui';
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -9,7 +10,6 @@ export default {
         './resources/views/**/*.blade.php',
         './resources/js/**/*.jsx',
     ],
-
     theme: {
         extend: {
             fontFamily: {
@@ -17,7 +17,5 @@ export default {
             },
         },
     },
-
-    plugins: [forms,require('daisyui')],
-    
+    plugins: [forms, daisyui],
 };
