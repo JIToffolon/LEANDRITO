@@ -32,13 +32,14 @@ class CarritoProductosController extends Controller
             ->first();
 
         if ($itemExistente) {
-            $finalPrice = $itemExistente->producto->price * ($itemExistente->qty + 1);
+            $finalPrice = $itemExistente->producto->price * ($itemExistente->quantity + 1);
             $itemExistente->update([
-                'qty' => $itemExistente->qty + 1,
-                'final_price' => $finalPrice,
+                'quantity' => $itemExistente->quantity + 1,
+                'total' => $finalPrice,
             ]);
+
         } else {
-           $productoCreado = ProductoCarrito::create([
+            ProductoCarrito::create([
                 'carrito_id' => $carrito_id,
                 'producto_id' => $producto_id,
                 'tipo_producto_id' => 1,
