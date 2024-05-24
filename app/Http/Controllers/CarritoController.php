@@ -23,3 +23,5 @@ class CarritoController extends Controller
         return response()->json($productos);
     }
 }
+
+

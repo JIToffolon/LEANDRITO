@@ -62,8 +62,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('deleteproduct/{id}', [CarritoProductosController::class, 'destroy'])->name('producto.deleteInCart');
     Route::get('cartItemsCount', [CarritoProductosController::class, 'countItemsInCart'])->name('carrito.itemsCount');
 
-
-    Route::get('/cart', [CartController::class, 'index'])->name('Cart.index');
     Route::get('/product/{id}', function ($id) {
         $cuadros = Producto::all();
         return Inertia::render('Product/Index', ['cuadros' => $cuadros, 'id' => $id]);

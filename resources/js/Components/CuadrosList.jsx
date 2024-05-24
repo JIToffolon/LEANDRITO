@@ -3,6 +3,7 @@ import React from "react";
 import { Link } from "@inertiajs/react";
 
 export const CuadrosList = ({ cuadros }) => {
+
     return (
         <div className="bg-gray-400 py-40 px-5">
             <h2 className=" font-normal mb-10 text-center text-4xl font-[Poppins] text-black">
@@ -13,7 +14,10 @@ export const CuadrosList = ({ cuadros }) => {
                     <div key={cuadro.id} className="flex  text-black">
                         <div className="card card-compact w-96 bg-white shadow-xl">
                             <figure>
-                                <img src={`Assets/Images/${cuadro.photo}`} alt="Cuadro" />
+                                <img
+                                    src={`Assets/Images/${cuadro.photo}`}
+                                    alt="Cuadro"
+                                />
                             </figure>
                             <div className="card-body">
                                 <h2 className="card-title">{cuadro.name}</h2>

@@ -5,8 +5,7 @@ import { dataContext } from "./Context/DataContext";
 
 function ProductDetail({ cuadros, id }) {
     const [product, setProduct] = useState(null);
-    const {buyProduct } = useContext(dataContext);
-
+    const { addToCart } = useContext(dataContext);
     useEffect(() => {
         const foundProduct = cuadros.find(
             (product) => product.id === Number(id)
@@ -33,10 +32,13 @@ function ProductDetail({ cuadros, id }) {
                         magna aliqua.
                     </p>
                     <div className="card-actions justify-end">
-                        <button  onClick={() => buyProduct(product)} className=" bg-gray-700 rounded-md py-2 px-3 text-white">
+                        <button
+                            onClick={() => addToCart(product.id)}
+                            className=" bg-gray-700 rounded-md py-2 px-3 text-white"
+                        >
                             Add To Cart
                         </button>
-                        <Link href={`/cart`}>
+                        <Link href={`/carrito`}>
                             <button className=" bg-gray-700 rounded-md py-2 px-3 text-white">
                                 Go to CarT
                             </button>

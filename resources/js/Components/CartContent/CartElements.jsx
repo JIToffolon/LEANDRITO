@@ -14,32 +14,37 @@ const CartElements = () => {
 
         setCart(newCart);
     };
-    return cart.map((product) => {
+    return cart.map((productoCarrito) => {
+        
+        const producto= productoCarrito.producto;
+        console.log(productoCarrito.producto_id);
+
         return (
             <div
                 className="flex flex-col w-full text-center gap-4 p-10 px-20 bg-white rounded-lg shadow-xs dark:bg-gray-800"
-                key={product.id}
+                key={productoCarrito.id}
             >
                 <div>
+                    
                     <img
                         className="object-cover w-24 h-24"
-                        src={product.img}
+                        src={`/assets/images/${producto.photo}`}
                         alt="Imagen"
                     />
                 </div>
                 <div>
                     <p className="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                        {product.name}
+                        {producto.name}
                     </p>
                     <CartItemCounter
-                        product={product}
-                        quanty={product.quanty}
+                        product={producto}
+                        quantity={productoCarrito.quantity}
                     />
                     <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">
-                        ${product.price * product.quanty}
+                        ${producto.price * productoCarrito.quantity}
                     </p>
                     <button
-                        onClick={() => deleteProduct(product.id)}
+                        onClick={() => deleteProduct(productoCarrito.id)}
                         className="bg-gray-500 px-3 py-3 rounded-xl"
                     >
                         ELIMINAR
