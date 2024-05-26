@@ -24,6 +24,7 @@ class CarritoProductosController extends Controller
             ]);
             $carrito_id = $carrito->id;
             session()->put('carrito_id', $carrito_id);
+            \Log::info('Nuevo carrito creado. carrito_id: ' . $carrito_id);
         }
 
 
@@ -47,6 +48,7 @@ class CarritoProductosController extends Controller
                 'total' => $producto->price
             ]);
         }
+
         return response()->json(['message' => 'Producto agregado al carrito correctamente']);
     }
 
@@ -58,7 +60,7 @@ class CarritoProductosController extends Controller
 
         $carritoProducto = ProductoCarrito::find($id);
         if($carritoProducto){
-                $final_price = $carritoProducto->product->price * $request->quantity;
+                $final_price = $carritoProducto->producto->price * $request->quantity;
                 $carritoProducto->quantity = $request->quantity;
                 $carritoProducto->total = $final_price;
                 $carritoProducto->save();
@@ -86,8 +88,13 @@ class CarritoProductosController extends Controller
 
     public function destroy(string $id)
     {
-        ProductoCarrito::find($id)->delete();
-
-        return response()->json(['success' => true]);
+        try {
+            ProductoCarrito::findOrFail($id)->delete();
+            return response()->json(['success' => true]);
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return response()->json(['error' => 'Producto no encontrado'], 404);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Error al eliminar el producto del carrito'], 500);
+        }
     }
 }

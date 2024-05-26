@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { IconShoppingCart } from "@tabler/icons-react";
 import { IconMenu2 } from "@tabler/icons-react";
 import { Link } from "@inertiajs/react";
+import { useContext } from "react";
+import { dataContext } from "./Context/DataContext";
+import TotalItems from "./CartContent/TotalItems";
 
 const NavBar = () => {
     const Links = [
@@ -12,6 +15,7 @@ const NavBar = () => {
     ];
 
     const [open, setOpen] = useState(false);
+    const {cartItemCount} = useContext(dataContext);
 
     return (
         <>
@@ -50,10 +54,14 @@ const NavBar = () => {
                         ))}
                         <button className=" text-white py-2 px-7  rounded-full md:ml-8  hover:text-gray-400 duration-300">
                             <IconShoppingCart color="white" size={28} />
+                            {cartItemCount}
                         </button>
+                        
+
                     </ul>
                 </div>
             </div>
+
         </>
     );
 };

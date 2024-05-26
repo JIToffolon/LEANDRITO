@@ -5,19 +5,10 @@ import CartItemCounter from "./CartItemCounter";
 import React from "react";
 
 const CartElements = () => {
-    const { cart, setCart } = useContext(dataContext);
-    const deleteProduct = (id) => {
-        const foundId = cart.find((element) => element.id === id);
-        const newCart = cart.filter((element) => {
-            return element !== foundId;
-        });
+    const { cart, deleteProduct } = useContext(dataContext);
 
-        setCart(newCart);
-    };
     return cart.map((productoCarrito) => {
-        
-        const producto= productoCarrito.producto;
-        console.log(productoCarrito.producto_id);
+        const producto = productoCarrito.producto;
 
         return (
             <div
@@ -25,7 +16,6 @@ const CartElements = () => {
                 key={productoCarrito.id}
             >
                 <div>
-                    
                     <img
                         className="object-cover w-24 h-24"
                         src={`/assets/images/${producto.photo}`}
@@ -36,10 +26,7 @@ const CartElements = () => {
                     <p className="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
                         {producto.name}
                     </p>
-                    <CartItemCounter
-                        product={producto}
-                        quantity={productoCarrito.quantity}
-                    />
+                    <CartItemCounter productoCarrito={productoCarrito} />
                     <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">
                         ${producto.price * productoCarrito.quantity}
                     </p>

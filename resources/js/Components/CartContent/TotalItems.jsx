@@ -3,10 +3,9 @@ import { useContext } from "react";
 import { dataContext } from "../Context/DataContext";
 
 const TotalItems = () => {
-    const { cart } = useContext(dataContext);
-    const itemsContador = cart.reduce ((acc,el)=> acc + el.quantity, 0)
+    const {getCartItemCount} = useContext(dataContext);
   return (
-    <span className=' text-xl text-white'>{itemsContador}</span>
+    <span className=' text-xl text-white'>{getCartItemCount}</span>
   )
 }
 
