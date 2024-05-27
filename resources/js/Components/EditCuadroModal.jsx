@@ -3,13 +3,17 @@ import React, { useState, useEffect } from 'react';
 const EditCuadroModal = ({ cuadro, show, onHide, updateCuadro }) => {
   const [cuadroData, setCuadroData] = useState(cuadro || {});
   const [errors, setErrors] = useState({});
+  console.log(cuadro);
 
   useEffect(() => {
     if (cuadro) {
       setCuadroData({
         name: cuadro.name || '',
-        price: cuadro.price || '',
+        description: cuadro.description || '',
         photo: cuadro.photo || '',
+        type: cuadro.type || '',
+        detailPrice: cuadro.price || '', 
+        detail_id: cuadro.detail_id || '',
       });
     }
   }, [cuadro]);
@@ -31,8 +35,9 @@ const EditCuadroModal = ({ cuadro, show, onHide, updateCuadro }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(cuadroData);
     try {
-      await updateCuadro(cuadro.id, cuadroData);
+      await updateCuadro(cuadro.product_id, cuadroData);
       setErrors({});
       onHide();
     } catch (error) {
@@ -59,7 +64,7 @@ const EditCuadroModal = ({ cuadro, show, onHide, updateCuadro }) => {
               <div className="modal-body mt-4">
                 <form onSubmit={handleSubmit} encType="multipart/form-data">
                   <div className="flex flex-col gap-4">
-                    <div className="flex flex-col">
+                  <div className="flex flex-col">
                       <label htmlFor="name" className="label">
                         <span className="label-text">Nombre:</span>
                       </label>
@@ -70,20 +75,22 @@ const EditCuadroModal = ({ cuadro, show, onHide, updateCuadro }) => {
                         onChange={handleChange}
                         className="input input-bordered"
                       />
+                      {/* Mostrar errores si existen */}
                       {errors.name && <div className="text-red-500 text-sm">{errors.name[0]}</div>}
                     </div>
                     <div className="flex flex-col">
-                      <label htmlFor="price" className="label">
-                        <span className="label-text">Precio:</span>
+                      <label htmlFor="description" className="label">
+                        <span className="label-text">Descripcion:</span>
                       </label>
                       <input
-                        type="number"
-                        name="price"
-                        value={cuadroData.price}
+                        type="text"
+                        name="description"
+                        value={cuadroData.description}
                         onChange={handleChange}
                         className="input input-bordered"
                       />
-                      {errors.price && <div className="text-red-500 text-sm">{errors.price[0]}</div>}
+                      {/* Mostrar errores si existen */}
+                      {errors.description && <div className="text-red-500 text-sm">{errors.description[0]}</div>}
                     </div>
                     <div className="flex flex-col">
                       <label htmlFor="photo" className="label">
@@ -97,6 +104,39 @@ const EditCuadroModal = ({ cuadro, show, onHide, updateCuadro }) => {
                       />
                       {errors.photo && <div className="text-red-500 text-sm">{errors.photo[0]}</div>}
                     </div>
+                    <div className="flex flex-col">
+                      <label htmlFor="type" className="label">
+                        <span className="label-text">Tipo de Producto:</span>
+                      </label>
+                      {/* Mostrar el tipo de producto actual y permitir su edición */}
+                      <input
+                        type="text"
+                        name="type"
+                        value={cuadroData.type}
+                        onChange={handleChange}
+                        className="input input-bordered"
+                        disabled // Deshabilitar para evitar ediciones accidentales, puedes cambiarlo según tus necesidades
+                      />
+                      {/* Mostrar errores si existen */}
+                      {errors.type && <div className="text-red-500 text-sm">{errors.type[0]}</div>}
+                    </div>
+                    <div className="flex flex-col">
+                      <label htmlFor="detailPrice" className="label">
+                        <span className="label-text">Precio del Detalle:</span>
+                      </label>
+                      <input
+                        type="number"
+                        name="detailPrice"
+                        value={cuadroData.detailPrice}
+                        onChange={handleChange}
+                        className="input input-bordered"
+                      />
+                      {/* Mostrar errores si existen */}
+                      {errors.detailPrice && <div className="text-red-500 text-sm">{errors.detailPrice[0]}</div>}
+                    </div>
+                    {/* Más campos para editar detalles del producto si es necesario */}
+
+                    {/* Más campos para editar detalles del producto si es necesario */}
                   </div>
                   <button type="submit" className="btn btn-primary self-center mt-4">Guardar Cambios</button>
                 </form>

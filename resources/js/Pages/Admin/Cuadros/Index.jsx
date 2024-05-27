@@ -41,8 +41,10 @@ const CuadrosIndex = ({ auth }) => {
   const deleteCuadro = async (cuadro) => {
     if (confirm('¿Estás seguro de eliminar este cuadro?')) {
       try {
-        await axios.delete(route('cuadros.destroy', { id: cuadro.id }));
-        handleSuccess('Cuadro eliminado correctamente');
+        const response = await axios.delete(route('delete.cuadro', { detail_id: cuadro.detail_id }));
+        console.log(response.data);
+        setSuccessMessage(response.data.success);
+        loadCuadros();
       } catch (error) {
         console.error('Error al eliminar el Cuadro:', error);
         throw error;

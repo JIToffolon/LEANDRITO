@@ -23,6 +23,11 @@ const CuadrosTable = ({ cuadros, editCuadro, deleteCuadro, createCuadro }) => {
       sortable: true,
     },
     {
+      name: 'Tipo',
+      selector: row => row.type,
+      sortable: true,
+    },
+    {
       name: 'Precio',
       selector: row => '$' + row.price,
       sortable: true,

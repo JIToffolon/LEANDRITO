@@ -5,8 +5,8 @@ import CartTotal from "./CartTotal";
 import TotalItems from "./TotalItems";
 
 const CartContent = () => {
-    const {cart} = useContext(dataContext);
-    
+    const { cart, clearCart,  } = useContext(dataContext);
+
     return cart.length > 0 ? (
 
     <>

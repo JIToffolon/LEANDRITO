@@ -5,12 +5,14 @@ use App\Http\Controllers\CarritoProductosController;
 use App\Models\Cuadro;
 use App\Http\Controllers\CuadrosController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CartItemsController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\PedidosController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Models\Product;
 use App\Models\Producto;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -41,6 +43,8 @@ Route::middleware('auth')->group(function () {
         Route::resource('cuadros', CuadrosController::class);
         Route::post('/cuadros/update/{cuadro}', [CuadrosController::class, 'update2'])->name('cuadros.update.post');
         Route::get('/api/cuadros', [CuadrosController::class, 'getCuadros'])->name('cuadros.get');
+        Route::get('/api/cuadros_type', [CuadrosController::class, 'getProductTypes'])->name('types.get');
+        Route::delete('/api/delete/cuadro/{detail_id}', [CuadrosController::class, 'destroy'])->name('delete.cuadro');
 
         Route::resource('roles', RoleController::class);
         Route::get('/api/roles', [RoleController::class, 'getRoles'])->name('roles.get');
@@ -55,15 +59,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/contacto', [ContactoController::class, 'index'])->name('Contacto.index');
 
     /* RUTAS PARA EL MANEJO DEL CARRITO.  LEER EL ARCHIVO README*/
-    Route::get('carrito', [CarritoController::class, 'index'])->name('carrito.index');
-    Route::get('carritoJson', [CarritoController::class, 'getCarrito'])->name('carrito.get');
-    Route::put('cartitem/{id}/updateqty', [CarritoProductosController::class, 'updateQuantity'])->name('producto.updateQuantity');
-    Route::post('add-to-cart/{producto_id}', [CarritoProductosController::class, 'addToCart'])->name('producto.addToCart'); 
-    Route::delete('deleteproduct/{id}', [CarritoProductosController::class, 'destroy'])->name('producto.deleteInCart');
-    Route::get('cartItemsCount', [CarritoProductosController::class, 'countItemsInCart'])->name('carrito.itemsCount');
+    Route::get('carrito', [CartController::class, 'index'])->name('carrito.index');
+    Route::get('carritoJson', [CartController::class, 'getCart'])->name('carrito.get');
+    Route::put('cartitem/{id}/updateqty', [CartItemsController::class, 'updateQuantity'])->name('producto.updateQuantity');
+    Route::post('add-to-cart', [CartItemsController::class, 'addToCart'])->name('producto.addToCart'); 
+    Route::delete('deleteproduct/{id}', [CartItemsController::class, 'destroy'])->name('producto.deleteInCart');
+    Route::get('cartItemsCount', [CartItemsController::class, 'countItemsInCart'])->name('carrito.itemsCount');
 
     Route::get('/product/{id}', function ($id) {
-        $cuadros = Producto::all();
+        $cuadros = Product::all();
         return Inertia::render('Product/Index', ['cuadros' => $cuadros, 'id' => $id]);
     });
 });

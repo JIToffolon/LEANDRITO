@@ -5,13 +5,24 @@ import { dataContext } from "./Context/DataContext";
 
 function ProductDetail({ cuadros, id }) {
     const [product, setProduct] = useState(null);
-    const { addToCart } = useContext(dataContext);
+    const {addToCart} = useContext(dataContext);
+
     useEffect(() => {
         const foundProduct = cuadros.find(
             (product) => product.id === Number(id)
         );
         setProduct(foundProduct);
     }, [id, cuadros]);
+
+    const handleAddToCart = async (product_id) => {
+        try {
+            console.log(product_id);
+            await addToCart(product_id);
+            console.log('Producto agregado al carrito correctamente');
+        } catch (error) {
+            console.error('Error al agregar el producto al carrito:', error);
+        }
+    };
 
     if (!product) {
         return <div>Loading...</div>;
@@ -32,10 +43,7 @@ function ProductDetail({ cuadros, id }) {
                         magna aliqua.
                     </p>
                     <div className="card-actions justify-end">
-                        <button
-                            onClick={() => addToCart(product.id)}
-                            className=" bg-gray-700 rounded-md py-2 px-3 text-white"
-                        >
+                        <button  onClick={() => handleAddToCart(product.id)} className=" bg-gray-700 rounded-md py-2 px-3 text-white">
                             Add To Cart
                         </button>
                         <Link href={`/carrito`}>
