@@ -2,10 +2,10 @@ import React, { useContext,useEffect } from "react";
 import { dataContext } from "../Context/DataContext";
 import CartElements from "./CartElements";
 import CartTotal from "./CartTotal";
-import TotalItems from "./TotalItems";
+
 
 const CartContent = () => {
-    const { cart, clearCart,  } = useContext(dataContext);
+    const { cart } = useContext(dataContext);
 
     return cart.length > 0 ? (
 

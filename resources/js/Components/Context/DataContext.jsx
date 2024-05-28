@@ -31,9 +31,12 @@ const DataProvider = ({ children }) => {
         }
     };
 
-    const addToCart = async (productId) => {
+    const addToCart = async (productId,productTypeId) => {
         try {
-            const response = await axios.post(`/add-to-cart/${productId}`);
+            const response = await axios.post('/add-to-cart',{
+                product_id: productId,
+                product_type_id: productTypeId,
+            });
             if (response.status === 200) {
                 console.log("addToCart - response.status:", response.status);
                 getCart();
@@ -44,7 +47,9 @@ const DataProvider = ({ children }) => {
                 console.error("Error al agregar el producto al carrito");
             }
         } catch (error) {
-            console.error("Error al agregar el producto al carrito", error);
+            console.error("Error al agregar el producto al carrito", error)
+            console.log(productTypeId);
+            console.log(productId);
         }
     };
 
@@ -57,10 +62,10 @@ const DataProvider = ({ children }) => {
     const increaseQuantity = async (productId) => {
         try {
             const response = await axios.put(
-                `/cartitem/${productId}/updateqty`,
+                route('producto.updateQuantity',{id:productId}),
                 {
                     quantity:
-                        cart.find((item) => item.producto_id === productId)
+                        cart.find((item) => item.id === productId)
                             .quantity + 1,
                 }
             );
@@ -83,7 +88,7 @@ const DataProvider = ({ children }) => {
     const decreaseQuantity = async (productId) => {
         try {
             const currentQuantity = cart.find(
-                (item) => item.producto_id === productId
+                (item) => item.id === productId
             ).quantity;
             if (currentQuantity > 1) {
                 const response = await axios.put(

@@ -66,10 +66,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('deleteproduct/{id}', [CartItemsController::class, 'destroy'])->name('producto.deleteInCart');
     Route::get('cartItemsCount', [CartItemsController::class, 'countItemsInCart'])->name('carrito.itemsCount');
 
-    Route::get('/product/{id}', function ($id) {
-        $cuadros = Product::all();
-        return Inertia::render('Product/Index', ['cuadros' => $cuadros, 'id' => $id]);
-    });
+
+Route::get('/product/{id}', function ($id) {
+    $product = Product::with('details.productType')->findOrFail($id);
+    return Inertia::render('Product/Index', ['product' => $product]);
+});
+
 });
 
 require __DIR__.'/auth.php';

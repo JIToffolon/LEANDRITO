@@ -7,39 +7,24 @@ import React from "react";
 const CartElements = () => {
     const { cart, deleteProduct } = useContext(dataContext);
 
-    return cart.map((productoCarrito) => {
-        const producto = productoCarrito.producto;
+    
 
-        return (
-            <div
-                className="flex flex-col w-full text-center gap-4 p-10 px-20 bg-white rounded-lg shadow-xs dark:bg-gray-800"
-                key={productoCarrito.id}
-            >
-                <div>
-                    <img
-                        className="object-cover w-24 h-24"
-                        src={`/assets/images/${producto.photo}`}
-                        alt="Imagen"
-                    />
-                </div>
-                <div>
-                    <p className="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                        {producto.name}
-                    </p>
-                    <CartItemCounter productoCarrito={productoCarrito} />
-                    <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">
-                        ${producto.price * productoCarrito.quantity}
-                    </p>
-                    <button
-                        onClick={() => deleteProduct(productoCarrito.id)}
-                        className="bg-gray-500 px-3 py-3 rounded-xl"
-                    >
-                        ELIMINAR
-                    </button>
-                </div>
-            </div>
-        );
-    });
+    return cart.map((item) => (
+        <div key={item.id} className="bg-white p-4 rounded-lg shadow-md">
+            <img
+                src={`/assets/images/${item.product.photo}`}
+                alt={item.product.name}
+                className="w-full h-48 object-cover rounded-t-lg"
+            />
+            <h2 className="text-lg font-bold mt-2">{item.product.name}</h2>
+            <p className="text-gray-600">{item.product.description}</p>
+            {/* <p className="text-gray-600">{item.productType.name}</p> */}
+            <p className="text-gray-800">${item.total}</p>
+            <CartItemCounter product={item} />
+            <button onClick={()=>deleteProduct(item.id)}>Eliminar</button>
+        </div>
+    ));
+    
 };
 
 export default CartElements;

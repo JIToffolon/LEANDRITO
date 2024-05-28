@@ -14,7 +14,7 @@ class CartItemsController extends Controller
     {
         $request->validate([
             'product_id' => 'required|exists:products,id',
-            'product_type_id' => 'required|exists:product_types,id',
+            'product_type_id' => 'required|exists:product_type,id',
         ]);
     
         $productDetail = ProductDetail::where('product_id', $request->product_id)
