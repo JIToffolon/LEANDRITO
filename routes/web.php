@@ -65,6 +65,8 @@ Route::middleware('auth')->group(function () {
     Route::post('add-to-cart', [CartItemsController::class, 'addToCart'])->name('producto.addToCart'); 
     Route::delete('deleteproduct/{id}', [CartItemsController::class, 'destroy'])->name('producto.deleteInCart');
     Route::get('cartItemsCount', [CartItemsController::class, 'countItemsInCart'])->name('carrito.itemsCount');
+    Route::delete('delete-all-products', [CartItemsController::class, 'deleteAll'])->name('carrito.deleteAll');
+
 
 
 Route::get('/product/{id}', function ($id) {

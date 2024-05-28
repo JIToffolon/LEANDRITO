@@ -122,4 +122,13 @@ class CartItemsController extends Controller
 
         return response()->json(['success' => true]);
     }
+
+    public function deleteAll(){
+        $cart_id = session()->get('cart_id', null);
+        $cartItems = CartItem::where('cart_id', $cart_id);
+        foreach($cartItems as $item){
+            $item->delete();
+        }
+        return response()->json(['message' => 'Se han eliminado todos los items del carrito'], 200);
+    }
 }
