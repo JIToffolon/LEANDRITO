@@ -6,6 +6,9 @@ import React from "react";
 
 const CartElements = () => {
     const { cart, deleteProduct } = useContext(dataContext);
+    console.log(cart);
+   
+
    
 
     return cart.map((item) => (
@@ -17,10 +20,10 @@ const CartElements = () => {
             />
             <h2 className="text-xl text-black text-center font-bold mt-2">{item.product.name}</h2>
             <p className="text-gray-600 mt-4">{item.product.description}</p>
-            <p className="text-gray-600 mt-2">{item.product_type_id}</p>
+            <p className="text-gray-600 mt-2">{item.product_type.name}</p>
             <p className="text-gray-800 mt-2">${item.total}</p>
             <CartItemCounter product={item} />
-            <button onClick={()=>deleteProduct(item.id)} className="bg-black rounded-md py-2 px-3 text-white text-sm mt-5 font-rockSalt  ">Eliminar</button>
+            <button onClick={()=>deleteProduct(item.id)} className="bg-black rounded-md py-2 px-3 text-white text-sm mt-5 font-rockSalt  ">Delete</button>
         </div>
     ));
     

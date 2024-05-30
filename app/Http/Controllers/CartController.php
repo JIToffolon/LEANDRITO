@@ -14,7 +14,7 @@ class CartController extends Controller
 
     public function getCart(){
         $cart_id = session()->get('cart_id', null);
-        $products = CartItem::with('product')->where('cart_id', $cart_id)->get();
+        $products = CartItem::with('product','productType')->where('cart_id', $cart_id)->get();
 
         return response()->json($products);
     }

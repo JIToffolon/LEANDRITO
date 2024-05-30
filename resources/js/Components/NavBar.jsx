@@ -25,8 +25,8 @@ const NavBar = () => {
                     </Link>
                 </div>
 
-                <div className="hidden md:flex flex-1 text-2xl text-white">
-                    <ul className="flex flex-row items-center justify-around gap-8 font-Rancho ">
+                <div className="hidden md:flex flex-1 justify-end text-2xl text-white">
+                    <ul className="flex flex-row items-center justify-around gap-16 font-Rancho ">
                         <Link href="/cuadros">
                             <li className=" hover:text-gray-400 cursor-pointer">
                                 Shop
@@ -90,9 +90,11 @@ const NavBar = () => {
                                 Shop
                             </li>
                         </Link>
-                        <li className=" hover:text-gray-400 cursor-pointer">
-                            Tattoo Designs
-                        </li>
+                        <Link href="/tattoo">
+                            <li className=" hover:text-gray-400 cursor-pointer">
+                                Tattoo Designs
+                            </li>
+                        </Link>
                         <li className=" hover:text-gray-400 cursor-pointer">
                             About Us
                         </li>

@@ -18,7 +18,7 @@ const CartContent = () => {
                                 onClick={deleteAll}
                                 className="bg-black rounded-xl px-4 py-2 text-white hover:bg-gray-800 transition duration-300 font-rockSalt"
                             >
-                                Vaciar Carrito
+                                Empty Cart
                             </button>
                         </div>
                     </div>
