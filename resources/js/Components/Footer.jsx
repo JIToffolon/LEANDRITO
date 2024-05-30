@@ -1,16 +1,16 @@
 import React from "react";
 import { IconBrandInstagram } from "@tabler/icons-react";
-import { IconBrandTwitter } from "@tabler/icons-react";
-import { IconBrandFacebook } from "@tabler/icons-react";
 import { Link } from "@inertiajs/react";
+import '../../css/app.css'
+
 
 const Footer = () => {
     return (
     
-        <footer className="footer footer-center p-4 bg-gray-600  text-white  text-sm">
+        <footer className="footer footer-center p-4 bg-black  text-white  text-sm">
             <div className="flex justify-center md:justify-start pt-4">
                 <Link href="/contacto">
-                    <div className="text-white hover:text-gray-400 text-xl font-[Poppins]">
+                    <div className="text-white hover:text-gray-400 text-lg  font-rockSalt">
                         {" "}
                         Contact Us{" "}
                     </div>
@@ -21,20 +21,12 @@ const Footer = () => {
          "
             >
                 <div className=" hover:bg-gray-400 rounded-lg">
-                    {" "}
-                    <IconBrandInstagram color="white" size={20} />
+                   <a href="https://www.instagram.com/toffo.stone/"> <IconBrandInstagram color="white" size={20} /></a>
                 </div>
-                <div className=" hover:bg-gray-400 rounded-lg">
-                    {" "}
-                    <IconBrandTwitter color="white" size={20} />
-                </div>
-                <div className=" hover:bg-gray-400 rounded-lg">
-                    {" "}
-                    <IconBrandFacebook color="white" size={20} />
-                </div>
+               
             </div>
             <aside>
-                <p>
+                <p className=" font-rockSalt text-lg">
                     © 2024 tattoo&ArtSebastianAlejandro, all rights // reserved.
                 </p>
             </aside>

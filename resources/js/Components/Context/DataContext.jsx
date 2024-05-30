@@ -31,9 +31,9 @@ const DataProvider = ({ children }) => {
         }
     };
 
-    const addToCart = async (productId,productTypeId) => {
+    const addToCart = async (productId, productTypeId) => {
         try {
-            const response = await axios.post('/add-to-cart',{
+            const response = await axios.post("/add-to-cart", {
                 product_id: productId,
                 product_type_id: productTypeId,
             });
@@ -47,7 +47,7 @@ const DataProvider = ({ children }) => {
                 console.error("Error al agregar el producto al carrito");
             }
         } catch (error) {
-            console.error("Error al agregar el producto al carrito", error)
+            console.error("Error al agregar el producto al carrito", error);
             console.log(productTypeId);
             console.log(productId);
         }
@@ -62,11 +62,10 @@ const DataProvider = ({ children }) => {
     const increaseQuantity = async (productId) => {
         try {
             const response = await axios.put(
-                route('producto.updateQuantity',{id:productId}),
+                route("producto.updateQuantity", { id: productId }),
                 {
                     quantity:
-                        cart.find((item) => item.id === productId)
-                            .quantity + 1,
+                        cart.find((item) => item.id === productId).quantity + 1,
                 }
             );
             if (response.status === 200) {
@@ -130,6 +129,20 @@ const DataProvider = ({ children }) => {
         }
     };
 
+    const deleteAll = async () => {
+        try {
+            const response = await axios.delete("/delete-all-products");
+            if (response.status === 200) {
+                getCart();
+                getCartItemCount(); // Actualiza el carrito después de eliminar un producto
+            } else {
+                console.error("Error al vaciar el carrito");
+            }
+        } catch (error) {
+            console.error("Error al vaciar el carrito", error);
+        }
+    };
+
     return (
         <dataContext.Provider
             value={{
@@ -142,6 +155,7 @@ const DataProvider = ({ children }) => {
                 deleteProduct,
                 cartItemCount,
                 getCartItemCount,
+                deleteAll,
             }}
         >
             {children}

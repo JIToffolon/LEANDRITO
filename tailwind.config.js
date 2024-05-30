@@ -13,7 +13,9 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                Rancho: ['rancho','cursive'],
+                rockSalt: ['Rock-Salt','sans'],
+                Caveat:['Caveat','cursive']
             },
         },
     },

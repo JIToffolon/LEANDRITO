@@ -58,3 +58,25 @@
 .btn-primary:hover {
   background-color: #0056b3; /* Color de fondo azul más oscuro al pasar el mouse */
 }
+
+
+/* src/index.css */
+@font-face {
+  font-family: 'Rancho';
+  src: url('../../public/Fonts/Rancho-Regular.ttf') format('truetype');
+  font-weight: regular;
+  font-style: regular;
+}
+
+@font-face{
+  font-family: 'Rock_Salt';
+  src: url('../../public/Fonts/RockSalt-Regular.ttf') format('truetype');
+  font-weight: regular;
+  font-style: regular;
+}
+
+@font-face{
+  font-family: 'Caveat';
+  src: url('../../public/Fonts/Caveat-VariableFont_wght.ttf');
+
+}

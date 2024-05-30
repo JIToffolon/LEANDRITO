@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "@/hooks/useForm";
 import NavBar from "@/Components/NavBar";
 import Footer from "@/Components/Footer";
+import '../../../css/app.css'
 
 export const FormWithCustomHook = () => {
     const [formValues, handleInputChange] = useForm({
@@ -24,16 +25,16 @@ export const FormWithCustomHook = () => {
             <div className="min-h-screen bg-gray-300 flex items-center justify-center">
             <form
                 onSubmit={handleSubmit}
-                className="md:w-full px-5 md:px-40  py-20 mt-10 bg-gray-300  text-start flex flex-col font-[Poppins] "
+                className="md:w-full px-5 md:px-20  py-20  m-5 rounded-xl bg-black  text-start flex flex-col "
             >
-                <div className="container flex flex-col mt-5 text-black">
+                <div className="container flex flex-col mt-5  text-white font-Rancho ">
                     <h1 className="prose text-5xl text-start">Contact</h1>
 
-                    <p className=" prose prose-gray prose-sm w-full py-3 text-sm text-center">
+                    <p className=" prose prose-gray prose-sm w-full py-3 text-lg text-center">
                         at art&tattooSebastianAlejandro
                     </p>
                 </div>
-                <div className="py-3 w-full">
+                <div className="py-3 w-full font-rockSalt">
                     <div className="py-3 flex flex-col md:flex-row gap-5">
                         <div className="relative flex-1">
                             <input
@@ -49,7 +50,7 @@ export const FormWithCustomHook = () => {
                             />
                             <label
                                 for="small_filled"
-                                className="absolute text-sm text-gray-500 duration-300 transform -translate-y-3 scale-75 top-3 z-10 origin-[0] start-2.5 peer-focus:text-gray-500 peer-focus:dark:text-gray-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
+                                className="absolute text-lg text-gray-500 duration-300 transform -translate-y-3 scale-75 top-3 z-10 origin-[0] start-2.5 peer-focus:text-gray-500 peer-focus:dark:text-gray-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
                             >
                                 First Name
                             </label>
@@ -68,7 +69,7 @@ export const FormWithCustomHook = () => {
                             />
                             <label
                                 for="small_filled"
-                                className="absolute text-sm text-gray-500 duration-300 transform -translate-y-3 scale-75 top-3 z-10 origin-[0] start-2.5 peer-focus:text-gray-500 peer-focus:dark:text-gray-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
+                                className="absolute text-lg text-gray-500 duration-300 transform -translate-y-3 scale-75 top-3 z-10 origin-[0] start-2.5 peer-focus:text-gray-500 peer-focus:dark:text-gray-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
                             >
                                 Last Name
                             </label>
@@ -87,7 +88,7 @@ export const FormWithCustomHook = () => {
                             />
                             <label
                                 for="small_filled"
-                                className="absolute text-sm text-gray-500 duration-300 transform -translate-y-3 scale-75 top-3 z-10 origin-[0] start-2.5 peer-focus:text-gray-500 peer-focus:dark:text-gray-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
+                                className="absolute text-lg text-gray-500 duration-300 transform -translate-y-3 scale-75 top-3 z-10 origin-[0] start-2.5 peer-focus:text-gray-500 peer-focus:dark:text-gray-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
                             >
                                 Email Adress
                             </label>
@@ -95,7 +96,7 @@ export const FormWithCustomHook = () => {
                     </div>
                 </div>
 
-                <div className="relative">
+                <div className="relative font-rockSalt">
                     <input
                         type="text"
                         name="message"
@@ -109,13 +110,13 @@ export const FormWithCustomHook = () => {
                     />
                     <label
                         for="small_filled"
-                        className="absolute text-sm text-gray-500 duration-300 transform -translate-y-3 scale-75 top-3 z-10 origin-[0] start-2.5 peer-focus:text-gray-500 peer-focus:dark:text-gray-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
+                        className="absolute text-lg text-gray-500 duration-300 transform -translate-y-3 scale-75 top-3 z-10 origin-[0] start-2.5 peer-focus:text-gray-500 peer-focus:dark:text-gray-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
                     >
                         Message
                     </label>
                 </div>
                 <button
-                    className=" bg-gray-700 hover:bg-gray-600 text-cyan-50 px-3 py-2 rounded-md  w-60 mt-4"
+                    className=" bg-black btn btn-ghost text-white text-xl font-rockSalt px-3 py-2 rounded-md  w-60 mt-4 border border-white"
                     type="submit"
                 >
                     Submit

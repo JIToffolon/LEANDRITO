@@ -8,6 +8,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CartItemsController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ContactoController;
+use App\Http\Controllers\TattooController;
 use App\Http\Controllers\PedidosController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
@@ -57,6 +58,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/cuadros', [CuadrosController::class, 'shop'])->name('shop.index');
     Route::get('/contacto', [ContactoController::class, 'index'])->name('Contacto.index');
+    Route::get('/tattoo', [TattooController::class, 'index'])->name('Tattoo.index');
 
     /* RUTAS PARA EL MANEJO DEL CARRITO.  LEER EL ARCHIVO README*/
     Route::get('carrito', [CartController::class, 'index'])->name('carrito.index');
