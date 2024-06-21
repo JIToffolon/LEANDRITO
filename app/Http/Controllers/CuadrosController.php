@@ -13,7 +13,7 @@ class CuadrosController extends Controller
 {
 
     public function index()
-    { //dd( Product::with('details.productType')->get());
+    {
         return Inertia::render('Admin/Cuadros/Index', [
             'cuadros' => Product::with('details.productType')->get()
         ]);

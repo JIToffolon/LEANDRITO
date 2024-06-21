@@ -42,7 +42,6 @@ const CuadrosIndex = ({ auth }) => {
     if (confirm('¿Estás seguro de eliminar este cuadro?')) {
       try {
         const response = await axios.delete(route('delete.cuadro', { detail_id: cuadro.detail_id }));
-        console.log(response.data);
         setSuccessMessage(response.data.success);
         loadCuadros();
       } catch (error) {

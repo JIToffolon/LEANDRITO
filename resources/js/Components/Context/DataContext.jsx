@@ -6,23 +6,31 @@ export const dataContext = createContext();
 const DataProvider = ({ children }) => {
     const [cart, setCart] = useState([]);
     const [cartItemCount, setCartItemCount] = useState(0);
+    const [totalCart, setTotalCart] = useState(0);
 
     const getCart = async () => {
         try {
             const response = await axios.get(route("carrito.get"));
-            console.log("getCart - response.data:", response.data);
             setCart(response.data);
         } catch (error) {
             console.error("Error al obtener el carrito", error);
         }
     };
 
+    const getTotalCart = async () => {
+        try {
+            const response = await axios.get(route("totalCart.get"));
+            setTotalCart(response.data);
+        } catch (error) {
+            console.error(
+                "Error al obtener el total del carrito"
+            );
+        } 
+    }
+
     const getCartItemCount = async () => {
         try {
             const response = await axios.get(route("carrito.itemsCount"));
-            console.log("getCartItemCount - response.data:", response.data);
-            console.log("getCartItemCount - response.data:", response);
-
             setCartItemCount(response.data);
         } catch (error) {
             console.error(
@@ -38,25 +46,23 @@ const DataProvider = ({ children }) => {
                 product_type_id: productTypeId,
             });
             if (response.status === 200) {
-                console.log("addToCart - response.status:", response.status);
                 getCart();
                 // Actualiza el carrito después de agregar un producto
                 getCartItemCount();
+                getTotalCart();
                 // Actualizamos el contador después de agregar un producto
             } else {
                 console.error("Error al agregar el producto al carrito");
             }
         } catch (error) {
             console.error("Error al agregar el producto al carrito", error);
-            console.log(productTypeId);
-            console.log(productId);
         }
     };
 
     useEffect(() => {
-        console.log("useEffect - Se está ejecutando");
         getCart();
         getCartItemCount();
+        getTotalCart();
     }, []);
 
     const increaseQuantity = async (productId) => {
@@ -71,6 +77,7 @@ const DataProvider = ({ children }) => {
             if (response.status === 200) {
                 getCart();
                 getCartItemCount();
+                getTotalCart();
             } else {
                 console.error(
                     "Error al aumentar la cantidad del producto en el carrito"
@@ -99,6 +106,7 @@ const DataProvider = ({ children }) => {
                 if (response.status === 200) {
                     getCart();
                     getCartItemCount();
+                    getTotalCart();
                 } else {
                     console.error(
                         "Error al disminuir la cantidad del producto en el carrito"
@@ -121,6 +129,7 @@ const DataProvider = ({ children }) => {
             if (response.status === 200) {
                 getCart();
                 getCartItemCount(); // Actualiza el carrito después de eliminar un producto
+                getTotalCart();
             } else {
                 console.error("Error al eliminar el producto del carrito");
             }
@@ -135,6 +144,7 @@ const DataProvider = ({ children }) => {
             if (response.status === 200) {
                 getCart();
                 getCartItemCount(); // Actualiza el carrito después de eliminar un producto
+                getTotalCart();
             } else {
                 console.error("Error al vaciar el carrito");
             }
@@ -155,6 +165,7 @@ const DataProvider = ({ children }) => {
                 deleteProduct,
                 cartItemCount,
                 getCartItemCount,
+                totalCart,
                 deleteAll,
             }}
         >

@@ -6,10 +6,6 @@ import React from "react";
 
 const CartElements = () => {
     const { cart, deleteProduct } = useContext(dataContext);
-    console.log(cart);
-   
-
-   
 
     return cart.map((item) => (
         <div key={item.id} className="bg-white p-4 rounded-lg shadow-md font-Rancho flex flex-col items-center">

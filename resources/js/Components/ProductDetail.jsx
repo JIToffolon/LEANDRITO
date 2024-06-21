@@ -12,7 +12,6 @@ function ProductDetail({ cuadros, id }) {
             (product) => product.id === Number(id)
         );
         setProduct(foundProduct);
-        console.log(foundProduct);
 
     }, [id, cuadros]);
 

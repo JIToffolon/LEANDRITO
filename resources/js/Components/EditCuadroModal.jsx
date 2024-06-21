@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 const EditCuadroModal = ({ cuadro, show, onHide, updateCuadro }) => {
   const [cuadroData, setCuadroData] = useState(cuadro || {});
   const [errors, setErrors] = useState({});
-  console.log(cuadro);
 
   useEffect(() => {
     if (cuadro) {
@@ -35,7 +34,6 @@ const EditCuadroModal = ({ cuadro, show, onHide, updateCuadro }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(cuadroData);
     try {
       await updateCuadro(cuadro.product_id, cuadroData);
       setErrors({});

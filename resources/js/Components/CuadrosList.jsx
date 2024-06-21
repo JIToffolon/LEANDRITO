@@ -1,11 +1,36 @@
-import React from "react";
-import { Link } from "@inertiajs/react";
+import React, { useState, useEffect } from "react";
+import { Link, usePage} from "@inertiajs/react";
 import '../../css/app.css'
 
 
 export const CuadrosList = ({ cuadros }) => {
+    const { props } = usePage(); // Obtén las props de la página
+    const { success_message } = props; // Extrae el mensaje de éxito de las props
+    const [showMessage, setShowMessage] = useState(success_message); // Estado local para controlar la visibilidad del mensaje
+    
+    useEffect(() => {
+        if (success_message) {
+            setShowMessage(success_message); // Muestra el mensaje
+            const timer = setTimeout(() => {
+                setShowMessage(null); // Elimina el mensaje después de 10 segundos
+            }, 10000);
+            return () => clearTimeout(timer); // Limpia el timeout si el componente se desmonta
+        }
+    }, [success_message]);
+
     return (
-        <div className="bg-gray-300 py-20 px-5">
+        <div className="bg-gray-300 py-10 px-5">
+                     {showMessage && (
+                <div className="bg-green-500 text-white p-4 rounded mb-4 text-center relative">
+                    {showMessage}
+                    <button
+                        className="absolute top-1 right-2 text-2xl leading-none"
+                        onClick={() => setShowMessage(null)}
+                    >
+                        &times;
+                    </button>
+                </div>
+            )}
             <h2 className=" font-Rancho mb-10 text-center text-8xl py-5 text-black">
                 Paintings
             </h2>

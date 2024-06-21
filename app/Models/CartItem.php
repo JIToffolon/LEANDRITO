@@ -23,7 +23,13 @@ class CartItem extends Model
 
     public function productType()
     {
-        return $this->belongsTo(ProductType::class);
+        return $this->belongsTo(ProductType::class, 'product_type_id', 'id');
+    }
+
+    public function productDetail()
+    {
+        return $this->hasOne(ProductDetail::class, 'product_id', 'product_id')
+                    ->where('product_type_id', $this->product_type_id);
     }
 
 }
