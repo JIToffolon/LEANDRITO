@@ -55,11 +55,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/pedidos', [PedidosController::class, 'index'])->name('pedidos.index');
 
     });
+});
 
-
-    Route::get('/cuadros', [CuadrosController::class, 'shop'])->name('shop.index');
-    Route::get('/contacto', [ContactoController::class, 'index'])->name('Contacto.index');
-    Route::get('/tattoo', [TattooController::class, 'index'])->name('Tattoo.index');
+    Route::get('/', [CuadrosController::class, 'shop'])->name('shop.index');
+    Route::get('/contacto', [ContactoController::class, 'index'])->name('contacto.index');
+    Route::post('/contacto', [ContactoController::class, 'store'])->name('contacto.store');
+    Route::get('/tattoo', [TattooController::class, 'index'])->name('tattoo.index');
 
     /* RUTAS PARA EL MANEJO DEL CARRITO.  LEER EL ARCHIVO README*/
     Route::get('carrito', [CartController::class, 'index'])->name('carrito.index');
@@ -75,12 +76,17 @@ Route::middleware('auth')->group(function () {
     Route::post('checkout', [PaymentController::class, 'createCheckoutSession'])->name('cart.process');
     Route::get('checkout/success', [PaymentController::class, 'success'])->name('checkout.success');
     Route::get('checkout/cancel', [PaymentController::class, 'cancel'])->name('checkout.cancel');
+    Route::post('/webhook/stripe', [PaymentController::class, 'events']);
     
 Route::get('/product/{id}', function ($id) {
     $product = Product::with('details.productType')->findOrFail($id);
     return Inertia::render('Product/Index', ['product' => $product]);
 });
 
+Route::get('/mailview', function () {
+    return view('mail.order');
 });
+
+
 
 require __DIR__.'/auth.php';

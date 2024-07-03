@@ -5,18 +5,18 @@ import '../../css/app.css'
 
 export const CuadrosList = ({ cuadros }) => {
     const { props } = usePage(); // Obtén las props de la página
-    const { success_message } = props; // Extrae el mensaje de éxito de las props
-    const [showMessage, setShowMessage] = useState(success_message); // Estado local para controlar la visibilidad del mensaje
+    const { message } = props; // Extrae el mensaje de éxito de las props
+    const [showMessage, setShowMessage] = useState(message); // Estado local para controlar la visibilidad del mensaje
     
     useEffect(() => {
-        if (success_message) {
-            setShowMessage(success_message); // Muestra el mensaje
+        if (message) {
+            setShowMessage(message); // Muestra el mensaje
             const timer = setTimeout(() => {
                 setShowMessage(null); // Elimina el mensaje después de 10 segundos
             }, 10000);
             return () => clearTimeout(timer); // Limpia el timeout si el componente se desmonta
         }
-    }, [success_message]);
+    }, [message]);
 
     return (
         <div className="bg-gray-300 py-10 px-5">
