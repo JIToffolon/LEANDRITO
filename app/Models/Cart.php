@@ -17,6 +17,10 @@ class Cart extends Model
         return $this->hasMany(CartItem::class, 'cart_id','id');
     }
 
+    public function Order(){
+        return $this->belongsTo(Order::class, 'cart_id','id');
+    }
+    
     public function totalCart(){
         $products = $this->cartItems()->get();
         $finalPrice = 0;

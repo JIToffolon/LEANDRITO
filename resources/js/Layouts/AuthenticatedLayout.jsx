@@ -27,6 +27,9 @@ export default function Authenticated({ user, header, children }) {
                                 <NavLink href={route('cuadros.index')} active={route().current('cuadros.index')}>
                                     Cuadros
                                 </NavLink>
+                                <NavLink href={route('pedidos.index')} active={route().current('pedidos.index')}>
+                                    Pedidos
+                                </NavLink>
                                 <NavLink href={route('users.index')} active={route().current('users.*')}>
                                     Usuarios
                                 </NavLink>
@@ -106,6 +109,9 @@ export default function Authenticated({ user, header, children }) {
                         </ResponsiveNavLink>
                         <ResponsiveNavLink href={route('cuadros.index')} active={route().current('cuadros.*')}>
                         Cuadros
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink href={route('pedidos.index')} active={route().current('pedidos.*')}>
+                        Pedidos
                         </ResponsiveNavLink>
                         <ResponsiveNavLink href={route('users.index')} active={route().current('users.*')}>
                             Usuarios

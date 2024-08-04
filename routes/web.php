@@ -53,6 +53,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/api/permissions', [RoleController::class, 'getPermissions'])->name('permissions.get');
 
         Route::get('/pedidos', [PedidosController::class, 'index'])->name('pedidos.index');
+        Route::get('/pedidosJson', [PedidosController::class, 'getPedidos'])->name('pedidos.get');
+        Route::get('/pedidos/{id}', [PedidosController::class, 'show'])->name('pedidos.show');
 
     });
 });

@@ -66,6 +66,7 @@ class PaymentController extends Controller
     public function success()
     {
         Session::flash('message', 'Purchase made successfully!');
+        session()->forget('cart_id');
         return redirect()->route('shop.index');
     }
 
@@ -125,7 +126,11 @@ class PaymentController extends Controller
 
                     //DATA EMAIL
                     $cart = Cart::with(['cartItems.product', 'cartItems.productType'])->find($event->data->object->metadata->cart_id);
-                    Mail::to($event->data->object->customer_details->email)->send(new OrderMail($cart, $order));
+                    if($cart){
+                        $cart->status = 'processed';
+                        $cart->save();
+                        Mail::to($event->data->object->customer_details->email)->send(new OrderMail($cart, $order));
+                    }
                 } catch (Exception $th) {
                     Log::info($th);
                 }
